@@ -16,7 +16,7 @@ module BitsOnTheRun
     end
 
     def response
-      @response ||= REXML::Document.new(open(url).read)
+      @response ||= REXML::Document.new(Curl::Easy.perform(url).body_str)
 
       status = @response.elements["/response/status"].first.to_s
       if status != "ok"
@@ -24,7 +24,7 @@ module BitsOnTheRun
       end
 
       @response
-    rescue OpenURI::HTTPError => e
+    rescue Curl::Err::CurlError => e
       raise BadResponseError.new("HTTP communication error: #{e.message}")
     end
 

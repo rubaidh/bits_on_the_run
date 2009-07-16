@@ -2,10 +2,10 @@
 require 'digest/sha1'
 require 'uri'
 require 'rexml/document'
-require 'open-uri'
 
 # External gem dependencies.
-require 'active_support'
+gem 'activesupport'; require 'active_support'
+gem 'curb'; require 'curb'
 
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'initializer'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'configuration'
