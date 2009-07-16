@@ -11,10 +11,15 @@ describe Client do
   
   describe "with a valid configuration" do
     before(:each) do
-      BitsOnTheRun::Initializer.run do |config|
-        config.api_key = 'api_key'
+      Initializer.run do |config|
+        config.api_key    = 'api_key'
         config.api_secret = 'api_secret'
       end
+    end
+
+    after(:each) do
+      Configuration.api_key    = nil
+      Configuration.api_secret = nil
     end
 
     describe "with a constant time & nonce" do
