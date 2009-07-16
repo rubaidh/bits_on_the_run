@@ -10,6 +10,7 @@ require 'active_support'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'initializer'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'configuration'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'client'
+require File.join File.dirname(__FILE__), 'bits_on_the_run', 'video'
 
 module BitsOnTheRun
 end
