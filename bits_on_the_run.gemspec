@@ -24,4 +24,6 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options     += [
     '--title', 'Bits on the run', '--main', 'README.rdoc', '--line-numbers'
   ]
+
+  s.add_dependency('activesupport')
 end
