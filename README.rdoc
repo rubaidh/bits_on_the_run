@@ -1,0 +1,6 @@
+= Bits on the run
+
+This is a Ruby implementation of the API for Bits on the run, a video hosting
+service. See <http://www.bitsontherun.com/> for more details.
+
+Copyright (c) 2009 Rubaidh Ltd, released under the MIT license
