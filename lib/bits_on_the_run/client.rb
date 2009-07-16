@@ -55,9 +55,7 @@ module BitsOnTheRun
     end
 
     def self.parameterize(params)
-      params.stringify_keys.sort.map do |key, value|
-        [URI.escape(key), URI.escape(value.to_s)].join '='
-      end.join '&'
+      params.reject { |k, v| v.blank? }.to_query
     end
   end
 end
