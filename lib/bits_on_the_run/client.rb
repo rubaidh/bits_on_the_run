@@ -1,4 +1,7 @@
 module BitsOnTheRun
+  class BadResponseError < StandardError
+  end
+
   class Client
     def initialize(action, params = {})
       default_params = {
@@ -14,6 +17,15 @@ module BitsOnTheRun
 
     def response
       @response ||= REXML::Document.new(open(url).read)
+
+      status = @response.elements["/response/status"].first.to_s
+      if status != "ok"
+        raise BadResponseError.new("Error returned from Bits on the run API: #{status}")
+      end
+
+      @response
+    rescue OpenURI::HTTPError => e
+      raise BadResponseError.new("HTTP communication error: #{e.message}")
     end
 
     protected
