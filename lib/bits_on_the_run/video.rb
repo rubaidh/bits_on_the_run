@@ -21,12 +21,12 @@ module BitsOnTheRun
       params = params.symbolize_keys
       @key             = params[:key]
       self.author      = params[:author]
-      self.date        = params[:date]
+      self.date        = params[:date]        || Time.now
       self.description = params[:description]
-      self.duration    = params[:duration]
+      self.duration    = params[:duration]    || 0
       self.link        = params[:link]
       self.status      = params[:status]
-      self.tags        = params[:tags]
+      self.tags        = params[:tags]        || []
       self.title       = params[:title]
     end
 
