@@ -44,7 +44,7 @@ module BitsOnTheRun
         if path.include?('@')
           child.value
         else
-          child.first
+          child[0]
         end.to_s
       else
         nil
