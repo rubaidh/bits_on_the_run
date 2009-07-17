@@ -18,7 +18,7 @@ module BitsOnTheRun
     def response
       @response ||= REXML::Document.new(Curl::Easy.perform(url).body_str)
 
-      status = @response.elements["/response/status"].first.to_s
+      status = @response.elements["/response/status"][0].to_s
       if status != "ok"
         raise BadResponseError.new("Error returned from Bits on the run API: #{status}")
       end
