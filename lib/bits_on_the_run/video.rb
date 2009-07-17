@@ -69,6 +69,9 @@ module BitsOnTheRun
     end
 
     def initialize_from_xml(doc)
+      tags = extract_xpath(doc, "//video/tags")
+      tags = tags.split(/, */) if tags.present?
+
       initialize_from_hash(
         :key         => extract_xpath(doc, "//video/@key"),
         :author      => extract_xpath(doc, "//video/author"),
@@ -77,7 +80,7 @@ module BitsOnTheRun
         :duration    => BigDecimal.new(extract_xpath(doc, "//video/duration")),
         :link        => extract_xpath(doc, "//video/link"),
         :status      => extract_xpath(doc, "//video/status"),
-        :tags        => extract_xpath(doc, "//video/tags").split(/, */),
+        :tags        => tags,
         :title       => extract_xpath(doc, "//video/title")
       )
     end
