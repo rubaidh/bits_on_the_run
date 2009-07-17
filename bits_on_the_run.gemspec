@@ -14,8 +14,24 @@ spec = Gem::Specification.new do |s|
     "for more details."
 
   s.files = %w(
-    bits_on_the_run.gemspec CHANGELOG MIT-LICENSE Rakefile README.rdoc
+    CHANGELOG
+    MIT-LICENSE
+    README.rdoc
+    Rakefile
+    bits_on_the_run.gemspec
+    lib/bits_on_the_run/client.rb
+    lib/bits_on_the_run/configuration.rb
+    lib/bits_on_the_run/initializer.rb
+    lib/bits_on_the_run/video.rb
+    lib/bits_on_the_run/video_conversion.rb
+    lib/bits_on_the_run/video_create_response.rb
+    lib/bits_on_the_run/video_template.rb
     lib/bits_on_the_run.rb
+    spec/bits_on_the_run/client_spec.rb
+    spec/bits_on_the_run/configuration_spec.rb
+    spec/bits_on_the_run/initializer_spec.rb
+    spec/bits_on_the_run/video_create_response_spec.rb
+    spec/bits_on_the_run/video_spec.rb
     spec/spec_helper.rb
   )
 
