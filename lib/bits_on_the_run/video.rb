@@ -27,6 +27,10 @@ module BitsOnTheRun
       @templates ||= VideoTemplate.list(key)
     end
 
+    def conversions
+      @conversions ||= VideoConversion.list(key)
+    end
+
     def save!
       client = Client.new('/videos/create',
         :title       => title,

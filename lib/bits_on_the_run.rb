@@ -13,6 +13,7 @@ require File.join File.dirname(__FILE__), 'bits_on_the_run', 'client'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'video'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'video_create_response'
 require File.join File.dirname(__FILE__), 'bits_on_the_run', 'video_template'
+require File.join File.dirname(__FILE__), 'bits_on_the_run', 'video_conversion'
 
 module BitsOnTheRun
 end
