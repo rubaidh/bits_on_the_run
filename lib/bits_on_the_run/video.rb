@@ -5,8 +5,15 @@ module BitsOnTheRun
       new(client.response)
     end
 
+    def self.create!(params = {})
+      returning new(params) do |video|
+        video.save!
+      end
+    end
+
     attr_reader :key
-    attr_accessor :author, :date, :description, :duration, :link, :status, :tags, :title
+    attr_accessor :author, :date, :description, :duration, :link, :status
+    attr_accessor :tags, :title, :filename
 
     def initialize(*args)
       if args.first.is_a?(REXML::Document)
@@ -16,7 +23,37 @@ module BitsOnTheRun
       end
     end
 
+    def save!
+      client = Client.new('/videos/create',
+        :title       => title,
+        :tags        => tags.join(", "),
+        :description => description,
+        :author      => author,
+        :date        => date.to_i,
+        :link        => link,
+        :md5         => md5,
+        :size        => size
+      )
+
+      post_video = VideoCreateResponse.new(client.response)
+      @key = post_video.key
+      post_video.response(filename)
+    end
+
     private
+
+    def md5
+      Digest::MD5.hexdigest data
+    end
+
+    def data
+      @data ||= File.read(filename)
+    end
+
+    def size
+      data.length
+    end
+
     def initialize_from_hash(params = {})
       params = params.symbolize_keys
       @key             = params[:key]
@@ -28,6 +65,7 @@ module BitsOnTheRun
       self.status      = params[:status]
       self.tags        = params[:tags]        || []
       self.title       = params[:title]
+      self.filename    = params[:filename]
     end
 
     def initialize_from_xml(doc)
