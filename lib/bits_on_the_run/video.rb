@@ -51,15 +51,15 @@ module BitsOnTheRun
     private
 
     def md5
-      Digest::MD5.hexdigest data
-    end
-
-    def data
-      @data ||= File.read(filename)
+      hash = Digest::MD5.new
+      File.open(filename, 'r') do |file|
+        hash.update(file.read(16384)) until file.eof
+      end
+      hash.hexdigest
     end
 
     def size
-      data.length
+      File.size(filename)
     end
 
     def initialize_from_hash(params = {})
