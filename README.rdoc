@@ -3,4 +3,104 @@
 This is a Ruby implementation of the API for Bits on the run, a video hosting
 service. See <http://www.bitsontherun.com/> for more details.
 
+= What's Implemented
+
+This is a guideline to what has been implemented based on the API at:
+http://docs.bitsontherun.com/system-api/
+
+=== Videos
+* /videos/create
+* /videos/show
+
+=== Templates and Conversions
+* /videos/templates/list
+* /videos/conversions/list
+
+= What's Missing
+
+The following are portions of the API that are currently not covered by the gem:
+
+=== Videos
+* /videos/list
+* /videos/update
+* /videos/delete
+
+=== Video Templates
+* /videos/templates/show
+
+=== Video Conversions
+* /videos/conversions/show
+* /videos/conversions/create
+* /videos/conversions/delete
+
+=== Video Thumbnails
+* /videos/thumbnails/show
+* /videos/thumbnails/update
+
+=== Accounts
+* All of it
+
+=== Channels
+* All of it
+
+Contributions to this gem are most welcome, fork the gem and send us a pull request :)
+
+= How to Use
+
+== Setting the api key and secret
+
+Create a new initializer in the config directory:
+
+# RAILS_ROOT/config/initializers/bits_on_the_run.rb
+BitsOnTheRun::Initializer.run do |config|
+  config.api_key    = "api_key"
+  config.api_secret = "api_secret"
+end
+
+== Uploading a video to Bits on the Run
+
+The Video methods implement a behaviour not completely unlike ActiveRecord
+
+To create a new Video object and save it:
+
+video.BitsOnTheRun::Video.new
+video.save!
+
+Atlernatively, these steps can be wrapped using the .create! method:
+
+video = BitsOnTheRun::Video.create!(:title => video_file_name, :filename => video_path)
+
+After calling .save! or .create!, you'll probably want to store video.key in persistent storage so you can access the video later.
+
+
+== Selecting a video
+
+video = BitsOnTheRun::Video.show(video_key)
+
+Which will return a Video object with the attributes:
+
+date::        The date the video was uploaded
+key::         The video key
+duration::    The video duration
+filename::    Filename
+title::       The title of the video
+tags::        An array of tags associated with the video
+status::      The video status
+link::        link
+description:: Video description
+
+
+=== Templates and conversions
+
+Videos are converted into web-friendly formats using templates. To access either:
+
+Association-like calls:
+video.templates
+video.conversions
+
+Direct API calls:
+BitsOnTheRun::VideoTemplate.list(video_key)
+BitsOnTheRun::VideoConversion.list(video_key)
+
+
 Copyright (c) 2009 Rubaidh Ltd, released under the MIT license
