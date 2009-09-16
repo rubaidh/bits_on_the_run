@@ -1,7 +1,7 @@
 module BitsOnTheRun
   class VideoTemplate
     def self.list(video_key)
-      client = Client.new('/videos/templates/list', :video_key => video_key)
+      client = Client.new('/accounts/templates/list', :video_key => video_key)
       client.response.elements["//templates"].map do |fragment|
         new(REXML::Document.new(fragment.to_s)) if fragment.respond_to?(:name)
       end.compact
